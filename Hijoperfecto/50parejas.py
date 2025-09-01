@@ -74,6 +74,14 @@ def algun_hijo_nueve(hijos):
     return any(all(cromosoma == 9 for cromosoma in individuo) for individuo in hijos)
 
 
+# Buscar el hijo y la generación que logró todos los cromosomas en 9
+def encontrar_hijo_exitoso(hijos):
+    for idx, individuo in enumerate(hijos):
+        if all(cromosoma == 9 for cromosoma in individuo):
+            return idx, individuo
+    return None, None
+
+
 if __name__ == "__main__":
     padre, madre = generar_padres()
     print(f"Padre original: {padre}")
@@ -90,16 +98,8 @@ if __name__ == "__main__":
         hijo_2 = mutacion(hijo_2)
         generacion += 1
 
-    print(f"Se alcanzó la meta en la generación {generacion}")
     print(f"Hijo 1 ultima generacion: {hijo_1}")
     print(f"Hijo 2 ultima generacion: {hijo_2}")
-
-    # Buscar el hijo y la generación que logró todos los cromosomas en 9
-    def encontrar_hijo_exitoso(hijos):
-        for idx, individuo in enumerate(hijos):
-            if all(cromosoma == 9 for cromosoma in individuo):
-                return idx, individuo
-        return None, None
 
     idx1, hijo_exitoso1 = encontrar_hijo_exitoso(hijo_1)
     idx2, hijo_exitoso2 = encontrar_hijo_exitoso(hijo_2)
