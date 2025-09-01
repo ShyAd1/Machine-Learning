@@ -67,9 +67,9 @@ def actualizar_padres(hijo1, hijo2):
     return padre, madre
 
 
-# Verificar si todos los cromosomas de los hijos son 9
-def todos_nueve(hijos):
-    return all(cromosoma == 9 for individuo in hijos for cromosoma in individuo)
+# Verificar si al menos un hijo tiene todos los cromosomas en 9
+def algun_hijo_nueve(hijos):
+    return any(all(cromosoma == 9 for cromosoma in individuo) for individuo in hijos)
 
 
 if __name__ == "__main__":
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     hijo_2 = mutacion(hijo_2)
 
     generacion = 1
-    while not (todos_nueve(hijo_1) and todos_nueve(hijo_2)):
+    while not (algun_hijo_nueve(hijo_1) or algun_hijo_nueve(hijo_2)):
         padre, madre = actualizar_padres(hijo_1, hijo_2)
         hijo_1, hijo_2 = herencia(padre, madre)
         hijo_1 = mutacion(hijo_1)
