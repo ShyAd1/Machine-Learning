@@ -1,0 +1,33 @@
+digraph tree {
+    node0 [label="¿Es vivo? (sí/no): "]
+    node1 [label="¿Pertenece al reino animal? (sí/no): "]
+    node2 [label="¿Vuela? (sí/no): "]
+    node3 [label="¿Tiene plumas? (sí/no): "]
+    node4 [label="¿Vive en el océano? (sí/no): "]
+    node5 [label="¿Es una planta? (sí/no): "]
+    node6 [label="¿Produce flores o frutos? (sí/no): "]
+    node7 [label="¿Es un hongo? (sí/no): "]
+    node8 [label="¿Es abstracto (no se puede tocar)? (sí/no): "]
+    node9 [label="¿Está relacionado con una emoción o estado mental? (sí/no): "]
+    node10 [label="¿Es positiva? (sí/no): "]
+    node11 [label="¿Fue creado por el humano? (sí/no): "]
+    node12 [label="¿Se utiliza para comida o es comida? (sí/no): "]
+    node13 [label="¿Es dada por la naturaleza? (sí/no): "]
+    node14 [label="¿Lleva más de un ingrediente? (sí/no): "]
+    node15 [label="¿Es más grande que una casa? (sí/no): "]
+    node0 -> node1;
+    node1 -> node2;
+    node2 -> node3;
+    node2 -> node4;
+    node1 -> node5;
+    node5 -> node6;
+    node5 -> node7;
+    node0 -> node8;
+    node8 -> node9;
+    node9 -> node10;
+    node9 -> node11;
+    node8 -> node12;
+    node12 -> node13;
+    node13 -> node14;
+    node12 -> node15;
+}

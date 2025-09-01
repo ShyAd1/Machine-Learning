@@ -1,0 +1,885 @@
+{
+  "pregunta": "¿Es un objeto físico?",
+  "si": {
+    "pregunta": "¿Está vivo?",
+    "si": {
+      "pregunta": "¿Es un animal?",
+      "si": {
+        "pregunta": "¿Es doméstico?",
+        "si": {
+          "pregunta": "¿Es un mamífero?",
+          "si": {
+            "pregunta": "¿Ladra?",
+            "si": {
+              "pregunta": "Perro"
+            },
+            "no": {
+              "pregunta": "¿Maulla?",
+              "si": {
+                "pregunta": "Gato"
+              },
+              "no": {
+                "pregunta": "Conejo"
+              }
+            }
+          },
+          "no": {
+            "pregunta": "¿Es un ave doméstica?",
+            "si": {
+              "pregunta": "¿Canta?",
+              "si": {
+                "pregunta": "Canario"
+              },
+              "no": {
+                "pregunta": "Gallina"
+              }
+            },
+            "no": {
+              "pregunta": "¿Habla?",
+              "si": {
+                "pregunta": "Loro"
+              },
+              "no": {
+                "pregunta": "Pato"
+              }
+            }
+          }
+        },
+        "no": {
+          "pregunta": "¿Es un animal de granja?",
+          "si": {
+            "pregunta": "¿Da leche?",
+            "si": {
+              "pregunta": "Vaca"
+            },
+            "no": {
+              "pregunta": "¿Da lana?",
+              "si": {
+                "pregunta": "Oveja"
+              },
+              "no": {
+                "pregunta": "Cerdo"
+              }
+            }
+          },
+          "no": {
+            "pregunta": "¿Vuela?",
+            "si": {
+              "pregunta": "¿Es nocturno?",
+              "si": {
+                "pregunta": "Búho"
+              },
+              "no": {
+                "pregunta": "Águila"
+              }
+            },
+            "no": {
+              "pregunta": "¿Vive en el agua?",
+              "si": {
+                "pregunta": "¿Es un mamífero marino?",
+                "si": {
+                  "pregunta": "Delfín"
+                },
+                "no": {
+                  "pregunta": "¿Es un pez grande?",
+                  "si": {
+                    "pregunta": "Tiburón"
+                  },
+                  "no": {
+                    "pregunta": "¿Es invertebrado?",
+                    "si": {
+                      "pregunta": "Pulpo"
+                    },
+                    "no": {
+                      "pregunta": "Medusa"
+                    }
+                  }
+                }
+              },
+              "no": {
+                "pregunta": "¿Es salvaje terrestre?",
+                "si": {
+                  "pregunta": "¿Es felino?",
+                  "si": {
+                    "pregunta": "León"
+                  },
+                  "no": {
+                    "pregunta": "Elefante"
+                  }
+                },
+                "no": {
+                  "pregunta": "¿Es un reptil?",
+                  "si": {
+                    "pregunta": "¿Es venenoso?",
+                    "si": {
+                      "pregunta": "Serpiente"
+                    },
+                    "no": {
+                      "pregunta": "Iguana"
+                    }
+                  },
+                  "no": {
+                    "pregunta": "Jirafa"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "no": {
+        "pregunta": "¿Es una planta comestible?",
+        "si": {
+          "pregunta": "¿Es una fruta?",
+          "si": {
+            "pregunta": "¿Es cítrica?",
+            "si": {
+              "pregunta": "¿Es verde?",
+              "si": {
+                "pregunta": "Limón"
+              },
+              "no": {
+                "pregunta": "¿Es anaranjada?",
+                "si": {
+                  "pregunta": "Naranja"
+                },
+                "no": {
+                  "pregunta": "Toronja"
+                }
+              }
+            },
+            "no": {
+              "pregunta": "¿Es tropical?",
+              "si": {
+                "pregunta": "¿Es largo?",
+                "si": {
+                  "pregunta": "Plátano"
+                },
+                "no": {
+                  "pregunta": "¿Es fibroso?",
+                  "si": {
+                    "pregunta": "Piña"
+                  },
+                  "no": {
+                    "pregunta": "Mango"
+                  }
+                }
+              },
+              "no": {
+                "pregunta": "¿Es una baya?",
+                "si": {
+                  "pregunta": "Fresa"
+                },
+                "no": {
+                  "pregunta": "Manzana"
+                }
+              }
+            }
+          },
+          "no": {
+            "pregunta": "¿Es una verdura?",
+            "si": {
+              "pregunta": "¿Es de raíz?",
+              "si": {
+                "pregunta": "Zanahoria"
+              },
+              "no": {
+                "pregunta": "¿Es de hoja?",
+                "si": {
+                  "pregunta": "Espinaca"
+                },
+                "no": {
+                  "pregunta": "Brócoli"
+                }
+              }
+            },
+            "no": {
+              "pregunta": "Maíz"
+            }
+          }
+        },
+        "no": {
+          "pregunta": "¿Es un árbol?",
+          "si": {
+            "pregunta": "¿Da frutos?",
+            "si": {
+              "pregunta": "¿Es un frutal común?",
+              "si": {
+                "pregunta": "Manzano"
+              },
+              "no": {
+                "pregunta": "Cerezo"
+              }
+            },
+            "no": {
+              "pregunta": "Roble"
+            }
+          },
+          "no": {
+            "pregunta": "¿Es ornamental?",
+            "si": {
+              "pregunta": "Helecho"
+            },
+            "no": {
+              "pregunta": "Cactus"
+            }
+          }
+        }
+      }
+    },
+    "no": {
+      "pregunta": "¿Es comida?",
+      "si": {
+        "pregunta": "¿Es natural?",
+        "si": {
+          "pregunta": "¿Es una fruta?",
+          "si": {
+            "pregunta": "¿Es cítrica?",
+            "si": {
+              "pregunta": "¿Es verde?",
+              "si": {
+          "pregunta": "Limón"
+              },
+              "no": {
+          "pregunta": "¿Es anaranjada?",
+          "si": {
+            "pregunta": "Naranja"
+          },
+          "no": {
+            "pregunta": "Toronja"
+          }
+              }
+            },
+            "no": {
+              "pregunta": "¿Es tropical?",
+              "si": {
+          "pregunta": "¿Es largo?",
+          "si": {
+            "pregunta": "Plátano"
+          },
+          "no": {
+            "pregunta": "¿Es fibroso?",
+            "si": {
+              "pregunta": "Piña"
+            },
+            "no": {
+              "pregunta": "Mango"
+            }
+          }
+              },
+              "no": {
+          "pregunta": "¿Es una baya?",
+          "si": {
+            "pregunta": "Fresa"
+          },
+          "no": {
+            "pregunta": "Manzana"
+          }
+              }
+            }
+          },
+          "no": {
+            "pregunta": "¿Es una verdura?",
+            "si": {
+              "pregunta": "¿Es de raíz?",
+              "si": {
+          "pregunta": "Zanahoria"
+              },
+              "no": {
+          "pregunta": "¿Es de hoja?",
+          "si": {
+            "pregunta": "Espinaca"
+          },
+          "no": {
+            "pregunta": "Brócoli"
+          }
+              }
+            },
+            "no": {
+              "pregunta": "Maíz"
+            }
+          }
+        },
+        "no": {
+          "pregunta": "¿Es un ingrediente?",
+          "si": {
+            "pregunta": "¿Es de origen vegetal?",
+            "si": {
+              "pregunta": "¿Es un cereal?",
+              "si": {
+          "pregunta": "¿Es trigo?",
+          "si": {
+            "pregunta": "Harina"
+          },
+          "no": {
+            "pregunta": "Arroz"
+          }
+              },
+              "no": {
+          "pregunta": "¿Es una legumbre?",
+          "si": {
+            "pregunta": "Frijol"
+          },
+          "no": {
+            "pregunta": "Azúcar"
+          }
+              }
+            },
+            "no": {
+              "pregunta": "¿Es de origen animal?",
+              "si": {
+          "pregunta": "¿Es un lácteo?",
+          "si": {
+            "pregunta": "Leche"
+          },
+          "no": {
+            "pregunta": "¿Es huevo?",
+            "si": {
+              "pregunta": "Huevo"
+            },
+            "no": {
+              "pregunta": "Manteca"
+            }
+          }
+              },
+              "no": {
+          "pregunta": "¿Es de origen mineral?",
+          "si": {
+            "pregunta": "Sal"
+          },
+          "no": {
+            "pregunta": "Levadura"
+          }
+              }
+            }
+          },
+          "no": {
+            "pregunta": "¿Es una bebida?",
+            "si": {
+              "pregunta": "¿Es alcohólica?",
+              "si": {
+          "pregunta": "¿Es destilada?",
+          "si": {
+            "pregunta": "¿Es fuerte?",
+            "si": {
+              "pregunta": "Vodka"
+            },
+            "no": {
+              "pregunta": "Ron"
+            }
+          },
+          "no": {
+            "pregunta": "¿Es fermentada?",
+            "si": {
+              "pregunta": "Cerveza"
+            },
+            "no": {
+              "pregunta": "Vino"
+            }
+          }
+              },
+              "no": {
+          "pregunta": "¿Es caliente?",
+          "si": {
+            "pregunta": "¿Es café?",
+            "si": {
+              "pregunta": "Café"
+            },
+            "no": {
+              "pregunta": "¿Es té?",
+              "si": {
+                "pregunta": "Té verde"
+              },
+              "no": {
+                "pregunta": "Chocolate caliente"
+              }
+            }
+          },
+          "no": {
+            "pregunta": "¿Es un jugo?",
+            "si": {
+              "pregunta": "¿Es tropical?",
+              "si": {
+                "pregunta": "Jugo de mango"
+              },
+              "no": {
+                "pregunta": "Jugo de manzana"
+              }
+            },
+            "no": {
+              "pregunta": "Agua de coco"
+            }
+          }
+              }
+            },
+            "no": {
+              "pregunta": "¿Es dulce?",
+              "si": {
+          "pregunta": "¿Es un postre frío?",
+          "si": {
+            "pregunta": "¿Es cremoso?",
+            "si": {
+              "pregunta": "Helado"
+            },
+            "no": {
+              "pregunta": "Nieve de limón"
+            }
+          },
+          "no": {
+            "pregunta": "¿Es un pastel?",
+            "si": {
+              "pregunta": "¿Es de chocolate?",
+              "si": {
+                "pregunta": "Pastel de chocolate"
+              },
+              "no": {
+                "pregunta": "Pastel de vainilla"
+              }
+            },
+            "no": {
+              "pregunta": "¿Es una galleta?",
+              "si": {
+                "pregunta": "Galletas"
+              },
+              "no": {
+                "pregunta": "Churros"
+              }
+            }
+          }
+              },
+              "no": {
+          "pregunta": "¿Es un platillo principal?",
+          "si": {
+            "pregunta": "¿Es mexicano?",
+            "si": {
+              "pregunta": "Tacos"
+            },
+            "no": {
+              "pregunta": "¿Es italiano?",
+              "si": {
+                "pregunta": "Pizza"
+              },
+              "no": {
+                "pregunta": "¿Es japonés?",
+                "si": {
+            "pregunta": "Sushi"
+                },
+                "no": {
+            "pregunta": "Curry"
+                }
+              }
+            }
+          },
+          "no": {
+            "pregunta": "¿Es una botana?",
+            "si": {
+              "pregunta": "Papas fritas"
+            },
+            "no": {
+              "pregunta": "Nachos"
+            }
+          }
+              }
+            }
+          }
+        }
+      },
+      "no": {
+        "pregunta": "¿Es una herramienta?",
+        "si": {
+          "pregunta": "¿Es manual?",
+          "si": {
+            "pregunta": "¿Sirve para golpear?",
+            "si": {
+              "pregunta": "Martillo"
+            },
+            "no": {
+              "pregunta": "¿Sirve para cortar?",
+              "si": {
+                "pregunta": "¿Puede ser eléctrica?",
+                "si": {
+                  "pregunta": "Sierra eléctrica"
+                },
+                "no": {
+                  "pregunta": "Serrucho"
+                }
+              },
+              "no": {
+                "pregunta": "Destornillador"
+              }
+            }
+          },
+          "no": {
+            "pregunta": "¿Es eléctrica?",
+            "si": {
+              "pregunta": "Taladro eléctrico"
+            },
+            "no": {
+              "pregunta": "Sierra manual"
+            }
+          }
+        },
+        "no": {
+          "pregunta": "¿Sirve para transportarse?",
+          "si": {
+            "pregunta": "¿Tiene motor?",
+            "si": {
+              "pregunta": "¿Vuela?",
+              "si": {
+                "pregunta": "¿Es grande?",
+                "si": {
+                  "pregunta": "Avión"
+                },
+                "no": {
+                  "pregunta": "Helicóptero"
+                }
+              },
+              "no": {
+                "pregunta": "¿Es terrestre?",
+                "si": {
+                  "pregunta": "¿Tiene cuatro ruedas?",
+                  "si": {
+                    "pregunta": "Automóvil"
+                  },
+                  "no": {
+                    "pregunta": "Motocicleta"
+                  }
+                },
+                "no": {
+                  "pregunta": "¿Es marino?",
+                  "si": {
+                    "pregunta": "¿Va bajo el agua?",
+                    "si": {
+                      "pregunta": "Submarino"
+                    },
+                    "no": {
+                      "pregunta": "¿Es grande?",
+                      "si": {
+                        "pregunta": "Barco"
+                      },
+                      "no": {
+                        "pregunta": "¿Es de motor?",
+                        "si": {
+                          "pregunta": "Yate"
+                        },
+                        "no": {
+                          "pregunta": "¿Es de remo?",
+                          "si": {
+                            "pregunta": "Kayak"
+                          },
+                          "no": {
+                            "pregunta": "Canoa"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "no": {
+                    "pregunta": "Barco"
+                  }
+                }
+              }
+            },
+            "no": {
+              "pregunta": "¿Tiene dos ruedas?",
+              "si": {
+                "pregunta": "Bicicleta"
+              },
+              "no": {
+                "pregunta": "Patineta"
+              }
+            }
+          },
+          "no": {
+            "pregunta": "¿Es un aparato electrónico?",
+            "si": {
+              "pregunta": "¿Sirve para comunicarse?",
+              "si": {
+                "pregunta": "Teléfono móvil"
+              },
+              "no": {
+                "pregunta": "¿Sirve para entretenimiento?",
+                "si": {
+                  "pregunta": "Consola de videojuegos"
+                },
+                "no": {
+                  "pregunta": "¿Sirve para trabajar?",
+                  "si": {
+                    "pregunta": "Laptop"
+                  },
+                  "no": {
+                    "pregunta": "Televisor"
+                  }
+                }
+              }
+            },
+            "no": {
+              "pregunta": "¿Es un mueble?",
+              "si": {
+                "pregunta": "¿Se usa para dormir?",
+                "si": {
+                  "pregunta": "¿Es una cama?",
+                  "si": {
+                    "pregunta": "Cama"
+                  },
+                  "no": {
+                    "pregunta": "Hamaca"
+                  }
+                },
+                "no": {
+                  "pregunta": "¿Se usa para sentarse?",
+                  "si": {
+                    "pregunta": "Silla"
+                  },
+                  "no": {
+                    "pregunta": "¿Se usa para descansar?",
+                    "si": {
+                      "pregunta": "Sofá"
+                    },
+                    "no": {
+                      "pregunta": "¿Se usa para guardar cosas?",
+                      "si": {
+                        "pregunta": "¿Es para ropa?",
+                        "si": {
+                          "pregunta": "¿Es un ropero?",
+                          "si": {
+                            "pregunta": "Ropero"
+                          },
+                          "no": {
+                            "pregunta": "¿Es una zapatera?",
+                            "si": {
+                              "pregunta": "Zapatera"
+                            },
+                            "no": {
+                              "pregunta": "Cómoda"
+                            }
+                          }
+                        },
+                        "no": {
+                          "pregunta": "¿Es un librero?",
+                          "si": {
+                            "pregunta": "Librero"
+                          },
+                          "no": {
+                            "pregunta": "Estante"
+                          }
+                        }
+                      },
+                      "no": {
+                        "pregunta": "¿Se usa para trabajar o arreglarse?",
+                        "si": {
+                          "pregunta": "¿Es un escritorio?",
+                          "si": {
+                            "pregunta": "Escritorio"
+                          },
+                          "no": {
+                            "pregunta": "Tocador"
+                          }
+                        },
+                        "no": {
+                          "pregunta": "Mesa"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "no": {
+                "pregunta": "¿Es alguna estructura?",
+                "si": {
+                  "pregunta": "¿Es de construcción?",
+                  "si": {
+                    "pregunta": "Pared"
+                  },
+                  "no": {
+                    "pregunta": "¿Es de ingeniería?",
+                    "si": {
+                      "pregunta": "Puente"
+                    },
+                    "no": {
+                      "pregunta": "¿Es biológica?",
+                      "si": {
+                        "pregunta": "ADN"
+                      },
+                      "no": {
+                        "pregunta": "¿Es matemática?",
+                        "si": {
+                          "pregunta": "Matriz"
+                        },
+                        "no": {
+                          "pregunta": "¿Es informática?",
+                          "si": {
+                            "pregunta": "Árbol binario"
+                          },
+                          "no": {
+                            "pregunta": "Red"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "no": {
+                  "pregunta": "¿Es un objeto decorativo?",
+                  "si": {
+                    "pregunta": "Cuadro"
+                  },
+                  "no": {
+                    "pregunta": "Espejo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "no": {
+    "pregunta": "¿Es algo irreal?",
+    "si": {
+      "pregunta": "¿Es un ser mitológico?",
+      "si": {
+        "pregunta": "¿Es griega?",
+        "si": {
+          "pregunta": "Zeus"
+        },
+        "no": {
+          "pregunta": "¿Es nórdica?",
+          "si": {
+            "pregunta": "Thor"
+          },
+          "no": {
+            "pregunta": "¿Es egipcia?",
+            "si": {
+              "pregunta": "Anubis"
+            },
+            "no": {
+              "pregunta": "¿Es japonesa?",
+              "si": {
+                "pregunta": "Kitsune"
+              },
+              "no": {
+                "pregunta": "¿Es azteca?",
+                "si": {
+                  "pregunta": "Quetzalcóatl"
+                },
+                "no": {
+                  "pregunta": "¿Es china?",
+                  "si": {
+                    "pregunta": "Dragón"
+                  },
+                  "no": {
+                    "pregunta": "Unicornio"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "no": {
+        "pregunta": "Fantasma"
+      }
+    },
+    "no": {
+      "pregunta": "¿Es una emoción?",
+      "si": {
+        "pregunta": "¿Es positiva?",
+        "si": {
+          "pregunta": "¿Está dirigida hacia otra persona?",
+          "si": {
+            "pregunta": "¿Es amor?",
+            "si": { 
+              "pregunta": "Amor" 
+            },
+            "no": {
+              "pregunta": "¿Es gratitud?",
+              "si": { 
+                "pregunta": "Gratitud" 
+              },
+              "no": { 
+                "pregunta": "Orgullo" 
+              }
+            }
+          },
+          "no": {
+            "pregunta": "¿Es interna/personal?",
+            "si": {
+              "pregunta": "¿Es alegría?",
+              "si": { 
+                "pregunta": "Alegría" 
+              },
+              "no": {
+                "pregunta": "¿Es confianza?",
+                "si": { 
+                  "pregunta": "Confianza" 
+                },
+                "no": { 
+                  "pregunta": "Alivio" 
+                }
+              }
+            }
+          }
+        },
+        "no": {
+          "pregunta": "¿Es negativa?",
+          "si": {
+            "pregunta": "¿Implica pérdida?",
+            "si": {
+              "pregunta": "¿Es tristeza?",
+              "si": { 
+                "pregunta": "Tristeza" 
+              },
+              "no": { 
+                "pregunta": "Culpa" 
+              }
+            },
+            "no": {
+              "pregunta": "¿Es reacción a peligro?",
+              "si": {
+                "pregunta": "¿Es miedo?",
+                "si": { 
+                  "pregunta": "Miedo" 
+                },
+                "no": { 
+                  "pregunta": "Ansiedad" 
+                }
+              },
+              "no": {
+                "pregunta": "¿Es social?",
+                "si": { 
+                  "pregunta": "Vergüenza" 
+                },
+                "no": { 
+                  "pregunta": "Enojo" 
+                }
+              }
+            }
+          }
+        }
+      },
+      "no": {
+        "pregunta": "¿Es una idea científica?",
+        "si": {
+          "pregunta": "¿Es de física?",
+          "si": {
+            "pregunta": "Teoría de la relatividad"
+          },
+          "no": {
+            "pregunta": "Big Bang"
+          }
+        },
+        "no": {
+          "pregunta": "¿Es un concepto abstracto?",
+          "si": {
+            "pregunta": "Libertad"
+          },
+          "no": {
+            "pregunta": "Justicia"
+          }
+        }
+      }
+    }
+  }
+}
