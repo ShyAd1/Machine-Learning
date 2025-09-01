@@ -60,11 +60,13 @@ def mutacion(hijo):
 
 # Actualizar padres con los hijos generados
 def actualizar_padres(hijo1, hijo2):
-    for i in range(nParejas):
-        for j in range(nCromosomas):
-            padre[i][j] = hijo1[i][j]
-            madre[i][j] = hijo2[nParejas - 1 - i][j]
-    return padre, madre
+    todos_hijos = hijo1 + hijo2
+    random.shuffle(todos_hijos)
+
+    # Asignar la primera mitad como padres y la segunda como madres
+    nuevos_padres = todos_hijos[:nParejas]
+    nuevas_madres = todos_hijos[nParejas : 2 * nParejas]
+    return nuevos_padres, nuevas_madres
 
 
 # Verificar si al menos un hijo tiene todos los cromosomas en 9
@@ -91,3 +93,24 @@ if __name__ == "__main__":
     print(f"Se alcanzó la meta en la generación {generacion}")
     print(f"Hijo 1 ultima generacion: {hijo_1}")
     print(f"Hijo 2 ultima generacion: {hijo_2}")
+
+    # Buscar el hijo y la generación que logró todos los cromosomas en 9
+    def encontrar_hijo_exitoso(hijos):
+        for idx, individuo in enumerate(hijos):
+            if all(cromosoma == 9 for cromosoma in individuo):
+                return idx, individuo
+        return None, None
+
+    idx1, hijo_exitoso1 = encontrar_hijo_exitoso(hijo_1)
+    idx2, hijo_exitoso2 = encontrar_hijo_exitoso(hijo_2)
+
+    if hijo_exitoso1 is not None:
+        print(
+            f"El hijo exitoso está en hijo_1, índice {idx1}, generación {generacion}: {hijo_exitoso1}"
+        )
+    elif hijo_exitoso2 is not None:
+        print(
+            f"El hijo exitoso está en hijo_2, índice {idx2}, generación {generacion}: {hijo_exitoso2}"
+        )
+    else:
+        print("No se encontró un hijo exitoso.")
