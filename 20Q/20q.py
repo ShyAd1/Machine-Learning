@@ -6,13 +6,18 @@ import os
 
 
 # Guarda el árbol de decisiones en un archivo JSON
-def guardar_arbol(arbol, archivo="arbol_20q.json"):
+def guardar_arbol(
+    arbol,
+    archivo="C:\\Users\\adhev\\Documents\\GitHub\\Machine-Learning\\20Q\\arbol_20q.json",
+):
     with open(archivo, "w", encoding="utf-8") as f:
         json.dump(arbol, f, ensure_ascii=False, indent=2)
 
 
 # Carga el árbol de decisiones desde un archivo JSON, si existe
-def cargar_arbol(archivo="arbol_20q.json"):
+def cargar_arbol(
+    archivo="C:\\Users\\adhev\\Documents\\GitHub\\Machine-Learning\\20Q\\arbol_20q.json",
+):
     if os.path.exists(archivo):
         with open(archivo, "r", encoding="utf-8") as f:
             return json.load(f)

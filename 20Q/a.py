@@ -153,19 +153,16 @@ def formatea_prompt_gemini(datos: dict) -> str:
 
 
 def main():
-    datos = juego_20q()
-    print(
-        f"\nPreguntas usadas: {datos['usadas']} / 20 (restantes: {datos['restantes']})\n"
-    )
-
-    prompt = formatea_prompt_gemini(datos)
     print("Prompt al modelo:\n------------------")
-    print(prompt)
+
     print("------------------\n")
 
     try:
         client = genai.Client()
-        resp = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+        resp = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents="Eres un experto en 20 preguntas. Hazme 20 preguntas para averiguar qué objeto pienso",
+        )
         print("Sugerencia del modelo:", resp.text.strip())
     except Exception as e:
         print("No fue posible invocar al modelo. Detalle:", str(e))
