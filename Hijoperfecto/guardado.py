@@ -1,5 +1,7 @@
 import random
 
+# random.seed(42)  # Fijar semilla para reproducibilidad
+
 nCromosomas = 20
 nParejas = 50
 
@@ -15,9 +17,7 @@ def generar_padres():
     return padre, madre
 
 
-# Herencia genetica
 def herencia(padre, madre):
-    # Cruza los cromosomas de los padres para crear dos hijos con promedios
     hijo_1 = [
         [(padre[i][j] + madre[i][j]) // 2 for j in range(nCromosomas)]
         for i in range(nParejas)
@@ -38,15 +38,36 @@ def mutacion(hijos):
     return hijos
 
 
+# Actualizar padres con los hijos generados
+# def actualizar_padres(hijo1, hijo2):
+#     # Suponiendo que todos_hijos está ordenado por alguna "calidad" descendente
+#     todos_hijos = hijo1 + hijo2
+
+#     # Ordenar hijos por suma de cromosomas (mayor es mejor)
+#     todos_hijos.sort(key=lambda x: sum(x), reverse=True)
+
+#     # Dividir en rangos
+#     top_180_140 = todos_hijos[0:50]  # 180-140 (25 mejores)
+#     top_140_100 = todos_hijos[50:100]  # 140-100 (siguientes 25)
+
+#     # Juntar según lo que pides
+#     nuevos_padres = top_180_140
+#     nuevas_madres = top_140_100
+
+#     return nuevos_padres, nuevas_madres
+
+
 # Función de torneo para seleccionar un individuo
 def torneo(hijos, k=2):
     return max(
         random.sample(hijos, k), key=lambda x: sum(x)
-    )  # Selección del mejor individuo, tomados de 2 en 2 al azar en base a la suma de cromosomas
+    )  # Selección del mejor individuo
 
 
 # Actualizar padres con los hijos generados
 def actualizar_padres(hijo1, hijo2):
+    # Junta a todos los hijos
+
     # Función de torneo para seleccionar un individuo
     nuevos_padres = [torneo(hijo1) for _ in range(nParejas)]
     nuevas_madres = [torneo(hijo2) for _ in range(nParejas)]
@@ -74,14 +95,29 @@ if __name__ == "__main__":
     hijo_1 = mutacion(hijo_1)
     hijo_2 = mutacion(hijo_2)
 
-    generacion = 0
+    generacion = 1
+    # for i in range(100):
+    #     padre, madre = actualizar_padres(hijo_1, hijo_2)
+    #     hijo_1, hijo_2 = herencia(padre, madre)
+    #     hijo_1 = mutacion(hijo_1)
+    #     hijo_2 = mutacion(hijo_2)
+    #     print(f"Hijo 1: {hijo_1}")
+    #     print(f"Hijo 2: {hijo_2}")
+    #     print(f"Generacion: {generacion}")
+    #     generacion += 1
+
     while not (algun_hijo_nueve(hijo_1) or algun_hijo_nueve(hijo_2)):
         padre, madre = actualizar_padres(hijo_1, hijo_2)
         hijo_1, hijo_2 = herencia(padre, madre)
         hijo_1 = mutacion(hijo_1)
         hijo_2 = mutacion(hijo_2)
+        print(f"Hijo 1: {hijo_1}")
+        print(f"Hijo 2: {hijo_2}")
         print(f"Generacion: {generacion}")
         generacion += 1
+
+    # print(f"Hijo 1 ultima generacion: {hijo_1}")
+    # print(f"Hijo 2 ultima generacion: {hijo_2}")
 
     idx1, hijo_exitoso1 = encontrar_hijo_exitoso(hijo_1)
     idx2, hijo_exitoso2 = encontrar_hijo_exitoso(hijo_2)
