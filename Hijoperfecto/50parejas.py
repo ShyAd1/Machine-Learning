@@ -83,6 +83,8 @@ if __name__ == "__main__":
         print(f"Generacion: {generacion}")
         generacion += 1
 
+    print(f"Ultimos hijos: {hijo_1}, {hijo_2}")
+
     idx1, hijo_exitoso1 = encontrar_hijo_exitoso(hijo_1)
     idx2, hijo_exitoso2 = encontrar_hijo_exitoso(hijo_2)
 
