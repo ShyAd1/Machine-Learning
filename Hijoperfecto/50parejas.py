@@ -39,23 +39,24 @@ def mutacion(hijos):
 
 
 # Función de torneo para seleccionar un individuo
-def torneo(hijos, k=3):
-    """Selección del mejor individuo, tomados de 3 en 3 al azar
-    del conjunto y seleccionamos al mejor en base a la cantidad
-    de cromosomas en 9"""
-    return max(random.sample(hijos, k), key=lambda x: x.count(9))
+def torneo(hijos, idx, k=2):
+    """Torneo donde el individuo idx siempre participa, junto con k-1 aleatorios."""
+    participantes = [hijos[idx]]
+    # Elegir k-1 participantes aleatorios que no sean idx
+    indices = list(range(len(hijos)))
+    indices.remove(idx)
+    participantes += random.sample([hijos[i] for i in indices], k - 1)
+    # Seleccionar el mejor por cantidad de 9
+    return max(participantes, key=lambda x: x.count(9))
 
 
 # Actualizar padres con los hijos generados
 def actualizar_padres(hijo1, hijo2):
     # Juntar todos los hijos
     todos_hijos = hijo1 + hijo2
-    # Barajear los hijos
-    random.shuffle(todos_hijos)
-
     # Función de torneo para seleccionar un individuo
-    nuevos_padres = [torneo(todos_hijos) for _ in range(nParejas)]
-    nuevas_madres = [torneo(todos_hijos) for _ in range(nParejas)]
+    nuevos_padres = [torneo(todos_hijos, i) for i in range(nParejas)]
+    nuevas_madres = [torneo(todos_hijos, i + nParejas) for i in range(nParejas)]
     return nuevos_padres, nuevas_madres
 
 
@@ -87,11 +88,12 @@ if __name__ == "__main__":
         hijo_1 = mutacion(hijo_1)
         hijo_2 = mutacion(hijo_2)
         print(f"Generacion: {generacion}")
-        print(f"Hijo 1: {hijo_1}")
-        print(f"Hijo 2: {hijo_2}")
+        # print(f"Hijo 1: {hijo_1}")
+        # print(f"Hijo 2: {hijo_2}")
         generacion += 1
 
-    # print(f"Ultimos hijos: {hijo_1}, {hijo_2}")
+    # print(f"Ultimo hijo 1: {hijo_1}")
+    # print(f"Ultimo hijo 2: {hijo_2}")
 
     idx1, hijo_exitoso1 = encontrar_hijo_exitoso(hijo_1)
     idx2, hijo_exitoso2 = encontrar_hijo_exitoso(hijo_2)
