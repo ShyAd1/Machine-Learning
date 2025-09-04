@@ -38,14 +38,6 @@ def mutacion(hijos):
     return hijos
 
 
-# Función de torneo para seleccionar un individuo
-def torneo(hijos, k=3):
-    """Selección del mejor individuo, tomados de 3 en 3 al azar
-    del conjunto y seleccionamos al mejor en base a la cantidad
-    de cromosomas en 9"""
-    return max(random.sample(hijos, k), key=lambda x: x.count(9))
-
-
 # Actualizar padres con los hijos generados
 def actualizar_padres(hijo1, hijo2):
     # Juntar todos los hijos
@@ -54,8 +46,8 @@ def actualizar_padres(hijo1, hijo2):
     random.shuffle(todos_hijos)
 
     # Función de torneo para seleccionar un individuo
-    nuevos_padres = [torneo(todos_hijos) for _ in range(nParejas)]
-    nuevas_madres = [torneo(todos_hijos) for _ in range(nParejas)]
+    nuevos_padres = todos_hijos[:50]
+    nuevas_madres = todos_hijos[50:]
     return nuevos_padres, nuevas_madres
 
 
@@ -86,9 +78,9 @@ if __name__ == "__main__":
         hijo_1, hijo_2 = herencia(padre, madre)
         hijo_1 = mutacion(hijo_1)
         hijo_2 = mutacion(hijo_2)
-        print(f"Generacion: {generacion}")
         print(f"Hijo 1: {hijo_1}")
         print(f"Hijo 2: {hijo_2}")
+        print(f"Generacion: {generacion}")
         generacion += 1
 
     # print(f"Ultimos hijos: {hijo_1}, {hijo_2}")
