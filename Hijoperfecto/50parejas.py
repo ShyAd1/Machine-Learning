@@ -15,6 +15,15 @@ def generar_padres():
     return padre, madre
 
 
+# Mutación aleatoria en un cromosoma de cada hijo
+def mutacion(hijos):
+    for i in range(nParejas):  # Iterar hijos
+        if random.random() < 0.10:  # 10% probabilidad de mutación por hijo
+            j = random.randint(0, nCromosomas - 1)  # Elegir cromosoma aleatorio
+            hijos[i][j] = random.randint(1, 9)  # Mutar cromosoma
+    return hijos
+
+
 # Herencia genetica
 def herencia(padre, madre):
     # Cruza los cromosomas de los padres para crear dos hijos con promedios
@@ -29,34 +38,32 @@ def herencia(padre, madre):
     return hijo_1, hijo_2
 
 
-# Mutación aleatoria en un cromosoma de cada hijo
-def mutacion(hijos):
-    for i in range(nParejas):  # Iterar hijos
-        if random.random() < 0.10:  # 10% probabilidad de mutación por hijo
-            j = random.randint(0, nCromosomas - 1)  # Elegir cromosoma aleatorio
-            hijos[i][j] = random.randint(1, 9)  # Mutar cromosoma
-    return hijos
-
-
-# Función de torneo para seleccionar un individuo
-def torneo(hijos, idx, k=2):
-    """Torneo donde el individuo idx siempre participa, junto con k-1 aleatorios."""
+# Función de torneo para seleccionar un individuo evitando incesto
+def torneo(hijos, idx, k=50, grupo=None):
+    """Torneo donde el individuo idx siempre participa, junto con k-1 aleatorios, evitando incesto."""
     participantes = [hijos[idx]]
-    # Elegir k-1 participantes aleatorios que no sean idx
     indices = list(range(len(hijos)))
-    indices.remove(idx)
+    # Si grupo está definido, excluye los índices del grupo (hermanos)
+    if grupo is not None:
+        indices = [i for i in indices if i not in grupo]
+    else:
+        indices.remove(idx)
     participantes += random.sample([hijos[i] for i in indices], k - 1)
-    # Seleccionar el mejor por cantidad de 9
     return max(participantes, key=lambda x: x.count(9))
 
 
-# Actualizar padres con los hijos generados
+# Actualizar padres con los hijos generados evitando incesto
 def actualizar_padres(hijo1, hijo2):
-    # Juntar todos los hijos
     todos_hijos = hijo1 + hijo2
-    # Función de torneo para seleccionar un individuo
-    nuevos_padres = [torneo(todos_hijos, i) for i in range(nParejas)]
-    nuevas_madres = [torneo(todos_hijos, i + nParejas) for i in range(nParejas)]
+    nuevos_padres = []
+    nuevas_madres = []
+    for i in range(nParejas):
+        # Los hijos generados por el mismo cruce están en posiciones i y i+nParejas
+        grupo_hermanos = [i, i + nParejas]
+        # Selecciona padre evitando incesto
+        nuevos_padres.append(torneo(todos_hijos, i, grupo=grupo_hermanos))
+        # Selecciona madre evitando incesto
+        nuevas_madres.append(torneo(todos_hijos, i + nParejas, grupo=grupo_hermanos))
     return nuevos_padres, nuevas_madres
 
 
@@ -88,8 +95,8 @@ if __name__ == "__main__":
         hijo_1 = mutacion(hijo_1)
         hijo_2 = mutacion(hijo_2)
         print(f"Generacion: {generacion}")
-        # print(f"Hijo 1: {hijo_1}")
-        # print(f"Hijo 2: {hijo_2}")
+        print(f"Hijo 1: {hijo_1}")
+        print(f"Hijo 2: {hijo_2}")
         generacion += 1
 
     # print(f"Ultimo hijo 1: {hijo_1}")
