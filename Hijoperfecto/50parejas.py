@@ -15,15 +15,6 @@ def generar_padres():
     return padre, madre
 
 
-# Mutación aleatoria en un cromosoma de cada hijo
-def mutacion(hijos):
-    for i in range(nParejas):  # Iterar hijos
-        if random.random() < 0.10:  # 10% probabilidad de mutación por hijo
-            j = random.randint(0, nCromosomas - 1)  # Elegir cromosoma aleatorio
-            hijos[i][j] = random.randint(1, 9)  # Mutar cromosoma
-    return hijos
-
-
 # Herencia genetica
 def herencia(padre, madre):
     # Cruza los cromosomas de los padres para crear dos hijos con promedios
@@ -38,8 +29,17 @@ def herencia(padre, madre):
     return hijo_1, hijo_2
 
 
+# Mutación aleatoria en un cromosoma de cada hijo
+def mutacion(hijos):
+    for i in range(nParejas):  # Iterar hijos
+        if random.random() < 0.17:  # 17% probabilidad de mutación por hijo
+            j = random.randint(0, nCromosomas - 1)  # Elegir cromosoma aleatorio
+            hijos[i][j] = random.randint(1, 9)  # Mutar cromosoma
+    return hijos
+
+
 # Función de torneo para seleccionar un individuo evitando incesto
-def torneo(hijos, idx, k=50, grupo=None):
+def torneo(hijos, idx, k=3, grupo=None):
     """Torneo donde el individuo idx siempre participa, junto con k-1 aleatorios, evitando incesto."""
     participantes = [hijos[idx]]
     indices = list(range(len(hijos)))
@@ -95,8 +95,8 @@ if __name__ == "__main__":
         hijo_1 = mutacion(hijo_1)
         hijo_2 = mutacion(hijo_2)
         print(f"Generacion: {generacion}")
-        print(f"Hijo 1: {hijo_1}")
-        print(f"Hijo 2: {hijo_2}")
+        # print(f"Hijo 1: {hijo_1}")
+        # print(f"Hijo 2: {hijo_2}")
         generacion += 1
 
     # print(f"Ultimo hijo 1: {hijo_1}")
