@@ -32,7 +32,7 @@ def herencia(padre, madre):
 # Mutación aleatoria en un cromosoma de cada hijo
 def mutacion(hijos):
     for i in range(nParejas):  # Iterar hijos
-        if random.random() < 0.17:  # 17% probabilidad de mutación por hijo
+        if random.random() < 0.01:  # 17% probabilidad de mutación por hijo
             j = random.randint(0, nCromosomas - 1)  # Elegir cromosoma aleatorio
             hijos[i][j] = random.randint(1, 9)  # Mutar cromosoma
     return hijos
