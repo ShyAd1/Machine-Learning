@@ -1,171 +1,166 @@
 import pandas as pd
 import numpy as np
+from sklearn.ensemble import HistGradientBoostingRegressor
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import BayesianRidge, LinearRegression
-from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
-from sklearn.svm import SVR
-from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
-import matplotlib.pyplot as plt
+import datetime
+import time
 
-# ===============================
-# 1. Cargar dataset
-# ===============================
-df = pd.read_csv("clima_cdmx_dataset_copia.csv")
+# import requests
 
-# Convertir fecha
-df["fecha_hora"] = pd.to_datetime(df["fecha_hora"], dayfirst=True)
-df["hora"] = df["fecha_hora"].dt.hour
-df["mes"] = df["fecha_hora"].dt.month
-df["dia_semana"] = df["fecha_hora"].dt.dayofweek
+# --- Cargar y preparar datos históricos ---
+df = pd.read_csv("regresion_clima/dataset_clima.csv", sep=",")
+df = df[[col for col in df.columns if not col.endswith("_source")]]
 
-# Eliminar columnas irrelevantes
-df = df.drop(columns=["fecha_hora", "direccion_viento", "clima"])
+df["datetime"] = pd.to_datetime(df[["year", "month", "day", "hour"]])
+df["day_of_year"] = df["datetime"].dt.dayofyear
+df["year_scaled"] = (df["year"] - df["year"].min()) / (
+    df["year"].max() - df["year"].min()
+)
+df["weekday"] = df["datetime"].dt.weekday
+df["sin_week"] = np.sin(2 * np.pi * df["weekday"] / 7)
+df["cos_week"] = np.cos(2 * np.pi * df["weekday"] / 7)
+df["day_of_month"] = df["datetime"].dt.day
+df["sin_day"] = np.sin(2 * np.pi * df["day_of_month"] / 31)
+df["cos_day"] = np.cos(2 * np.pi * df["day_of_month"] / 31)
+df["sin_year"] = np.sin(2 * np.pi * df["day_of_year"] / 365)
+df["cos_year"] = np.cos(2 * np.pi * df["day_of_year"] / 365)
+df["sin_hour"] = np.sin(2 * np.pi * df["hour"] / 24)
+df["cos_hour"] = np.cos(2 * np.pi * df["hour"] / 24)
 
-# Convertir decimales con coma a punto y a numérico
-df = df.replace(",", ".", regex=True).apply(pd.to_numeric, errors="coerce")
-df = df.fillna(df.mean(numeric_only=True))
+X = df[
+    [
+        "sin_year",
+        "cos_year",
+        "sin_hour",
+        "cos_hour",
+        "sin_week",
+        "cos_week",
+        "sin_day",
+        "cos_day",
+        "year_scaled",
+    ]
+]
+y = df["temp"]
 
-# ===============================
-# 2. Variables X y target y
-# ===============================
-X = df.drop(columns=["temperatura"])
-y = df["temperatura"]
-
-# ===============================
-# 3. Train/Test split (sin shuffle para mantener orden temporal si lo hay)
-# ===============================
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, shuffle=False
+    X, y, test_size=0.2, random_state=42
 )
 
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
+model = HistGradientBoostingRegressor(
+    learning_rate=0.03, max_iter=800, max_depth=10, min_samples_leaf=5, random_state=42
+)
+model.fit(X_train, y_train)
 
-# ===============================
-# 4. Modelos de regresión
-# ===============================
-modelos = {
-    "LinearRegression": LinearRegression(),
-    "BayesianRidge": BayesianRidge(),
-    "RandomForest": RandomForestRegressor(
-        n_estimators=400, max_depth=18, random_state=42, n_jobs=-1
-    ),
-    "SVR_rbf": SVR(kernel="rbf", C=1.0, epsilon=0.1),
-    "GradientBoosting": GradientBoostingRegressor(random_state=42),
-}
+y_pred = model.predict(X_test)
+rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+mae = mean_absolute_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
 
-resultados = []
-figuras_scatter = []
-figuras_residuos = []
+print(f"RMSE: {rmse:.2f}")
+print(f"MAE: {mae:.2f}")
+print(f"R²: {r2:.3f}")
 
-for nombre, modelo in modelos.items():
-    # Elegir datos escalados sólo para los modelos lineales / sensibles a escala
-    if nombre in ["LinearRegression", "BayesianRidge", "SVR_rbf"]:
-        Xtr, Xte = X_train_scaled, X_test_scaled
+
+# --- Función para preparar fecha/hora como antes ---
+def preparar_fecha(year, month, day, hour):
+    day_of_year = pd.Timestamp(year=year, month=month, day=day).day_of_year
+    sin_year = np.sin(2 * np.pi * day_of_year / 365)
+    cos_year = np.cos(2 * np.pi * day_of_year / 365)
+    sin_hour = np.sin(2 * np.pi * hour / 24)
+    cos_hour = np.cos(2 * np.pi * hour / 24)
+
+    weekday = pd.Timestamp(year=year, month=month, day=day).weekday()
+    sin_week = np.sin(2 * np.pi * weekday / 7)
+    cos_week = np.cos(2 * np.pi * weekday / 7)
+    day_of_month = pd.Timestamp(year=year, month=month, day=day).day
+    sin_day = np.sin(2 * np.pi * day_of_month / 31)
+    cos_day = np.cos(2 * np.pi * day_of_month / 31)
+
+    year_min = df["year"].min()
+    year_max = df["year"].max()
+    if year_max > year_min:
+        year_scaled = (year - year_min) / (year_max - year_min)
     else:
-        Xtr, Xte = X_train, X_test  # árboles y boosting no necesitan escalado
+        year_scaled = 0.0
 
-    modelo.fit(Xtr, y_train)
-    y_pred = modelo.predict(Xte)
+    row = {
+        "sin_year": sin_year,
+        "cos_year": cos_year,
+        "sin_hour": sin_hour,
+        "cos_hour": cos_hour,
+        "sin_week": sin_week,
+        "cos_week": cos_week,
+        "sin_day": sin_day,
+        "cos_day": cos_day,
+        "year_scaled": year_scaled,
+    }
+    df_row = pd.DataFrame([row])
+    return df_row.reindex(columns=X.columns, fill_value=0.0)
 
-    mse = mean_squared_error(y_test, y_pred)
-    rmse = np.sqrt(mse)
-    mae = mean_absolute_error(y_test, y_pred)
-    r2 = r2_score(y_test, y_pred)
 
-    resultados.append(
-        {
-            "modelo": nombre,
-            "MAE": mae,
-            "RMSE": rmse,
-            "R2": r2,
-        }
+# # --- Función para obtener datos actuales de la API para CDMX ---
+# def obtener_datos_api(lat=19.4326, lon=-99.1332):
+#     url = (
+#         f"https://api.open-meteo.com/v1/forecast?"
+#         f"latitude={lat}&longitude={lon}&current_weather=true"
+#         f"&hourly=temperature_2m,relative_humidity_2m,pressure_msl,wind_speed_10m"
+#     )
+#     resp = requests.get(url)
+#     data = resp.json()
+#     current = data.get("current_weather", {})
+#     # algunas versiones de API usan "current" o "current_weather"
+#     temp_api = current.get("temperature") or current.get("temperature_2m")
+#     rhum_api = None
+#     pres_api = None
+#     wspd_api = None
+#     # No todas las variables estarán en current_weather — tal vez estén en hourly
+#     # Aquí hacemos un fallback sencillo:
+#     hourly = data.get("hourly", {})
+#     if rhum_api is None:
+#         rhum_vals = hourly.get("relative_humidity_2m")
+#         if rhum_vals:
+#             rhum_api = rhum_vals[0]
+#     if pres_api is None:
+#         pres_vals = hourly.get("pressure_msl")
+#         if pres_vals:
+#             pres_api = pres_vals[0]
+#     if wspd_api is None:
+#         wspd_vals = hourly.get("wind_speed_10m")
+#         if wspd_vals:
+#             wspd_api = wspd_vals[0]
+
+#     return {
+#         "temp_api": temp_api,
+#         "rhum_api": rhum_api,
+#         "pres_api": pres_api,
+#         "wspd_api": wspd_api,
+#     }
+
+
+print("\nIniciando actualización automática cada minuto (Ctrl + C para detener)...\n")
+
+while True:
+    now = datetime.datetime.now()
+    year, month, day, hour = now.year, now.month, now.day, now.hour
+
+    X_live = preparar_fecha(year, month, day, hour)  # Ajuste de zona horaria
+    pred_temp = model.predict(X_live)[0]
+
+    # api_data = obtener_datos_api()
+    # temp_api = api_data["temp_api"]
+
+    # if temp_api is not None:
+    #     # Ajuste: mezcla tu predicción con la medición actual de la API
+    #     ajuste = (temp_api - pred_temp) * 0.85  # factor 0.5 = 50% de la diferencia
+    #     pred_final = pred_temp + ajuste
+    # else:
+    #     pred_final = pred_temp
+
+    print(
+        f"[{now.strftime('%Y-%m-%d %H:%M:%S')}] "
+        f"Predicción de la temperatura: {pred_temp:.2f} °C | "
+        # f"API actual: {temp_api:.2f} °C"
     )
 
-    # Scatter Real vs Predicho
-    fig1, ax1 = plt.subplots(figsize=(5, 5))
-    ax1.scatter(y_test, y_pred, alpha=0.6)
-    lims = [min(y_test.min(), y_pred.min()), max(y_test.max(), y_pred.max())]
-    ax1.plot(lims, lims, "r--")
-    ax1.set_title(f"Real vs Predicho - {nombre}")
-    ax1.set_xlabel("Real")
-    ax1.set_ylabel("Predicho")
-    fig1.tight_layout()
-    plt.show()
-
-    # Residuos
-    resid = y_test - y_pred
-    fig2, ax2 = plt.subplots(figsize=(6, 4))
-    ax2.hist(resid, bins=20, alpha=0.75, color="#1f77b4")
-    ax2.set_title(f"Residuos - {nombre}")
-    ax2.set_xlabel("Residuo")
-    ax2.set_ylabel("Frecuencia")
-    fig2.tight_layout()
-    plt.show()
-
-# ===============================
-# 5. Resumen comparativo
-# ===============================
-res_df = pd.DataFrame(resultados).sort_values(by="RMSE")
-print("\n=== RESULTADOS COMPARATIVOS (ordenados por RMSE) ===")
-print(res_df.to_string(index=False))
-
-# Barras comparativas de RMSE / MAE / R2
-fig, axes = plt.subplots(1, 3, figsize=(15, 4))
-res_df.plot(x="modelo", y="RMSE", kind="bar", ax=axes[0], color="#d62728", legend=False)
-axes[0].set_title("RMSE")
-axes[0].set_ylabel("RMSE")
-res_df.plot(x="modelo", y="MAE", kind="bar", ax=axes[1], color="#ff7f0e", legend=False)
-axes[1].set_title("MAE")
-res_df.plot(x="modelo", y="R2", kind="bar", ax=axes[2], color="#2ca02c", legend=False)
-axes[2].set_title("R2")
-axes[2].set_ylim(0, 1)
-for ax in axes:
-    for p in ax.patches:
-        ax.annotate(
-            f"{p.get_height():.2f}",
-            (p.get_x() + p.get_width() / 2, p.get_height() + 0.01),
-            ha="center",
-            fontsize=8,
-        )
-fig.suptitle("Comparativa de Modelos")
-plt.tight_layout()
-plt.show()
-
-# ===============================
-# 6. Elegir mejor modelo para ejemplo de predicción (menor RMSE)
-# ===============================
-mejor_nombre = res_df.iloc[0]["modelo"]
-mejor_modelo = modelos[mejor_nombre]
-print(f"\nMejor modelo según RMSE: {mejor_nombre}")
-
-# Asegurar que esté entrenado (ya lo está, pero por claridad)
-if mejor_nombre in ["LinearRegression", "BayesianRidge", "SVR_rbf"]:
-    mejor_modelo.fit(X_train_scaled, y_train)
-    X_ref = X_train_scaled
-else:
-    mejor_modelo.fit(X_train, y_train)
-    X_ref = X_train
-
-# ===============================
-# 7. Predicción ejemplo
-# ===============================
-# Construir un nuevo ejemplo (usar columnas de X en el mismo orden)
-nuevo_dato = pd.DataFrame(
-    [{col: X.iloc[-1][col] for col in X.columns}]  # copia última fila como plantilla
-)
-# Puedes modificar algún valor manualmente aquí si deseas:
-# nuevo_dato['hora'] = 7
-
-# Escalar según corresponda
-if mejor_nombre in ["LinearRegression", "BayesianRidge", "SVR_rbf"]:
-    nuevo_dato_scaled = scaler.transform(nuevo_dato)
-    prediccion = mejor_modelo.predict(nuevo_dato_scaled)
-else:
-    prediccion = mejor_modelo.predict(nuevo_dato)
-
-print(
-    "Temperatura predicha (ejemplo basado en última fila modificable):", prediccion[0]
-)
+    time.sleep(60)
