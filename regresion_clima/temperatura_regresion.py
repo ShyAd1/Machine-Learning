@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
-from sklearn.ensemble import HistGradientBoostingRegressor
+from sklearn.ensemble import HistGradientBoostingRegressor, ExtraTreesRegressor
+from sklearn.svm import SVR
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
 import datetime
@@ -47,9 +48,15 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-model = HistGradientBoostingRegressor(
-    learning_rate=0.03, max_iter=800, max_depth=10, min_samples_leaf=5, random_state=42
+
+# model = HistGradientBoostingRegressor(
+#     learning_rate=0.03, max_iter=800, max_depth=10, min_samples_leaf=5, random_state=42
+# )
+model = ExtraTreesRegressor(
+    n_estimators=200, max_depth=15, min_samples_leaf=3, random_state=42
 )
+# model = SVR(kernel="rbf", C=1.0, epsilon=0.1)
+
 model.fit(X_train, y_train)
 
 y_pred = model.predict(X_test)
