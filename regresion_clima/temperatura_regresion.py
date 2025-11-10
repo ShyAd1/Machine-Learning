@@ -9,7 +9,7 @@ import time
 # import requests
 
 # --- Cargar y preparar datos históricos ---
-df = pd.read_csv("regresion_clima/dataset_clima.csv", sep=",")
+df = pd.read_csv("regresion_clima/dataset_clima_76680.csv", sep=",")
 df = df[[col for col in df.columns if not col.endswith("_source")]]
 
 df["datetime"] = pd.to_datetime(df[["year", "month", "day", "hour"]])
@@ -159,7 +159,7 @@ while True:
 
     print(
         f"[{now.strftime('%Y-%m-%d %H:%M:%S')}] "
-        f"Predicción de la temperatura: {pred_temp:.2f} °C | "
+        f"Predicción de la temperatura: {pred_temp:.2f} °C"
         # f"API actual: {temp_api:.2f} °C"
     )
 
