@@ -1,0 +1,7 @@
+﻿tipo_objeto,rareza,nivel_requerido,precio_venta,peso,potencia,precision,resistencia,velocidad,alcance,efecto,duracion,valor_estrategico
+caña,1,1,120,3.8,45,55,50,40,60,35,80,50
+caña,3,10,720,4.9,78,72,85,65,70,55,120,82
+cebo,1,1,15,0.2,30,60,25,55,40,65,30,45
+cebo,2,5,45,0.2,40,70,30,60,45,75,40,60
+tesoro,2,0,300,2.5,55,40,60,30,35,80,0,70
+tesoro,4,0,1400,5.5,85,65,90,40,50,95,0,95
