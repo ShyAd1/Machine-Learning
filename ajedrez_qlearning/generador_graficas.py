@@ -58,16 +58,18 @@ class GeneradorGraficas:
             vic_ale,
             width,
             label="vs Aleatorio",
-            color="#4CAF50",
-            edgecolor="black",
+            color="#FF6B9D",
+            edgecolor="darkblue",
+            alpha=0.85,
         )
         bars2 = plt.bar(
             x + width / 2,
             vic_gre,
             width,
             label="vs Greedy",
-            color="#F44336",
-            edgecolor="black",
+            color="#C44569",
+            edgecolor="darkblue",
+            alpha=0.85,
         )
 
         plt.ylabel("Tasa de Victoria (%)", fontsize=12, fontweight="bold")
@@ -120,7 +122,7 @@ class GeneradorGraficas:
 
         data = [turnos_A_ale, turnos_A_gre, turnos_B_ale, turnos_B_gre]
         labels = ["A vs Ale", "A vs Gre", "B vs Ale", "B vs Gre"]
-        colors = ["#4CAF50", "#F44336", "#2196F3", "#FF9800"]
+        colors = ["#A8E6CF", "#FFD3B6", "#FFAAA5", "#FF8B94"]
 
         bars = plt.bar(labels, data, color=colors, edgecolor="black")
         plt.ylabel("Turnos promedio", fontsize=12, fontweight="bold")
@@ -148,13 +150,18 @@ class GeneradorGraficas:
         plt.figure(figsize=(8, 6))
 
         plt.hist(
-            markov_A["longitudes"], bins=30, edgecolor="black", alpha=0.7, color="green"
+            markov_A["longitudes"],
+            bins=30,
+            edgecolor="purple",
+            alpha=0.75,
+            color="#87CEEB",
+            linewidth=1.5,
         )
         plt.axvline(
             markov_A["longitud_promedio"],
-            color="red",
-            linestyle="--",
-            linewidth=2.5,
+            color="#FF1493",
+            linestyle="-.",
+            linewidth=3,
             label=f"Media: {markov_A['longitud_promedio']:.1f}",
         )
 
@@ -172,13 +179,18 @@ class GeneradorGraficas:
         plt.figure(figsize=(8, 6))
 
         plt.hist(
-            markov_B["longitudes"], bins=30, edgecolor="black", alpha=0.7, color="blue"
+            markov_B["longitudes"],
+            bins=30,
+            edgecolor="darkgreen",
+            alpha=0.75,
+            color="#FFB6C1",
+            linewidth=1.5,
         )
         plt.axvline(
             markov_B["longitud_promedio"],
-            color="red",
-            linestyle="--",
-            linewidth=2.5,
+            color="#FF4500",
+            linestyle="-.",
+            linewidth=3,
             label=f"Media: {markov_B['longitud_promedio']:.1f}",
         )
 
@@ -198,7 +210,9 @@ class GeneradorGraficas:
         casos = ["Caso A\n(4x4)", "Caso B\n(5x5)"]
         estados = [markov_A["estados_unicos"], markov_B["estados_unicos"]]
 
-        bars = plt.bar(casos, estados, color=["#4CAF50", "#2196F3"], edgecolor="black")
+        bars = plt.bar(
+            casos, estados, color=["#9B59B6", "#E74C3C"], edgecolor="navy", alpha=0.8
+        )
         plt.ylabel("Estados únicos visitados", fontsize=12, fontweight="bold")
         plt.title("Complejidad del Espacio de Estados", fontsize=14, fontweight="bold")
         plt.grid(True, alpha=0.3, axis="y")
@@ -240,17 +254,19 @@ class GeneradorGraficas:
             markov_probs,
             width,
             label="Política Aleatoria",
-            color="gray",
-            alpha=0.7,
-            edgecolor="black",
+            color="#95A5A6",
+            alpha=0.8,
+            edgecolor="maroon",
+            linewidth=1.5,
         )
         bars2 = plt.bar(
             x + width / 2,
             rl_probs,
             width,
             label="Agente RL",
-            color="gold",
-            edgecolor="black",
+            color="#F39C12",
+            edgecolor="maroon",
+            linewidth=1.5,
         )
 
         plt.ylabel("Tasa de victoria (%)", fontsize=12, fontweight="bold")
@@ -294,19 +310,19 @@ class GeneradorGraficas:
         ax1.plot(
             episodios_A,
             recompensas_A,
-            alpha=0.2,
-            color="lightblue",
-            linewidth=0.5,
+            alpha=0.25,
+            color="#FFDAB9",
+            linewidth=0.7,
             label="Recompensa por episodio",
         )
         ax1.plot(
             range(ventana - 1, len(recompensas_A)),
             promedio_A,
-            color="darkblue",
-            linewidth=2.5,
+            color="#8B008B",
+            linewidth=3,
             label=f"Promedio móvil ({ventana} episodios)",
         )
-        ax1.axhline(y=0, color="red", linestyle="--", linewidth=1, alpha=0.5)
+        ax1.axhline(y=0, color="#FF6347", linestyle=":", linewidth=2, alpha=0.7)
         ax1.set_xlabel("Episodio", fontsize=12, fontweight="bold")
         ax1.set_ylabel("Recompensa Total", fontsize=12, fontweight="bold")
         ax1.set_title(
@@ -322,7 +338,13 @@ class GeneradorGraficas:
             f"Promedio últimos 1000 ep: {promedio_final_A:.1f}",
             transform=ax1.transAxes,
             verticalalignment="top",
-            bbox=dict(boxstyle="round", facecolor="wheat", alpha=0.8),
+            bbox=dict(
+                boxstyle="round",
+                facecolor="#B0E0E6",
+                alpha=0.9,
+                edgecolor="#4682B4",
+                linewidth=2,
+            ),
         )
 
         # ===== CASO B =====
@@ -332,19 +354,19 @@ class GeneradorGraficas:
         ax2.plot(
             episodios_B,
             recompensas_B,
-            alpha=0.2,
-            color="lightgreen",
-            linewidth=0.5,
+            alpha=0.25,
+            color="#DDA0DD",
+            linewidth=0.7,
             label="Recompensa por episodio",
         )
         ax2.plot(
             range(ventana - 1, len(recompensas_B)),
             promedio_B,
-            color="darkgreen",
-            linewidth=2.5,
+            color="#2F4F4F",
+            linewidth=3,
             label=f"Promedio móvil ({ventana} episodios)",
         )
-        ax2.axhline(y=0, color="red", linestyle="--", linewidth=1, alpha=0.5)
+        ax2.axhline(y=0, color="#FF6347", linestyle=":", linewidth=2, alpha=0.7)
         ax2.set_xlabel("Episodio", fontsize=12, fontweight="bold")
         ax2.set_ylabel("Recompensa Total", fontsize=12, fontweight="bold")
         ax2.set_title(
@@ -360,7 +382,13 @@ class GeneradorGraficas:
             f"Promedio últimos 1000 ep: {promedio_final_B:.1f}",
             transform=ax2.transAxes,
             verticalalignment="top",
-            bbox=dict(boxstyle="round", facecolor="wheat", alpha=0.8),
+            bbox=dict(
+                boxstyle="round",
+                facecolor="#FFE4E1",
+                alpha=0.9,
+                edgecolor="#CD5C5C",
+                linewidth=2,
+            ),
         )
 
         plt.tight_layout()
