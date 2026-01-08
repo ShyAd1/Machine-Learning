@@ -11,7 +11,7 @@ print("=" * 80)
 
 # Cargar el dataset
 print("\nCargando dataset...")
-df = pd.read_csv("dataset.csv")
+df = pd.read_csv("dataset_proyecto_objetos.csv")
 print(f"Dataset cargado: {df.shape[0]} registros")
 
 # Separar características (X) y etiquetas (y)

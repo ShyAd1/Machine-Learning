@@ -6,28 +6,28 @@ objetos_config = {
     "cana_basica": {
         "rareza": (1, 2),
         "nivel_requerido": (1, 15),
-        "precio_venta": 4,
+        "precio_venta": 40,
         "porcentaje_completado": (0, 1),
         "valor_estrategico": (1, 2),
     },
     "cana_rara": {
         "rareza": (2, 3),
         "nivel_requerido": (10, 40),
-        "precio_venta": 16,
+        "precio_venta": 160,
         "porcentaje_completado": (1, 2),
         "valor_estrategico": (2, 4),
     },
     "cana_epica": {
         "rareza": (3, 4),
         "nivel_requerido": (30, 60),
-        "precio_venta": 64,
+        "precio_venta": 640,
         "porcentaje_completado": (2, 3),
         "valor_estrategico": (4, 8),
     },
     "cana_legendaria": {
         "rareza": (4, 5),
         "nivel_requerido": (50, 100),
-        "precio_venta": 256,
+        "precio_venta": 2560,
         "porcentaje_completado": 3,  # Valor fijo
         "valor_estrategico": (8, 8),
     },
@@ -62,7 +62,7 @@ objetos_config = {
     "tesoro": {
         "rareza": (5, 5),
         "nivel_requerido": (1, 100),
-        "precio_venta": 170,
+        "precio_venta": 1280,
         "porcentaje_completado": (2, 3),
         "valor_estrategico": (10, 10),
     },
